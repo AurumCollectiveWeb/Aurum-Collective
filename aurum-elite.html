@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurum Collective — Where Purpose Becomes Prosperity</title>
+<meta name="description" content="A members-only ecosystem where freedom stops being the dream and becomes the beginning. Web design, digital presence, and financial freedom for the select few.">
+<meta name="keywords" content="web design, financial freedom, members only, digital agency, elite web design">
+<meta property="og:title" content="Aurum Collective — Where Purpose Becomes Prosperity">
+<meta property="og:description" content="A members-only ecosystem where freedom stops being the dream and becomes the beginning.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#B8952A;--gold-light:#D4AF50;--gold-dim:#7A6020;--gold-faint:rgba(184,149,42,.06);
+  --black:#080808;--black2:#0E0E0E;--black3:#141414;--black4:#1A1A1A;
+  --ivory:#E8E0D0;--ivory-dim:#8A7F6A;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--ivory);font-family:'Jost',sans-serif;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:opacity .3s;}
+#curR{position:fixed;width:30px;height:30px;border:1px solid rgba(184,149,42,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s ease;}
+
+/* NOISE + VIGNETTE */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:500;opacity:.5;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.8) 100%);pointer-events:none;z-index:499;}
+
+/* PROGRESS BAR */
+#progress{position:fixed;top:0;left:0;height:1px;background:linear-gradient(to right,var(--gold-dim),var(--gold));z-index:9000;width:0%;transition:width .1s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;padding:24px 60px;display:flex;justify-content:space-between;align-items:center;z-index:1000;transition:all .4s;}
+nav.scrolled{padding:16px 60px;background:rgba(8,8,8,.97);border-bottom:1px solid rgba(184,149,42,.06);}
+.nav-logo{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.4em;color:var(--gold);text-decoration:none;}
+.nav-links{display:flex;gap:40px;align-items:center;}
+.nav-links a{font-size:10px;font-weight:300;letter-spacing:.25em;text-transform:uppercase;color:var(--ivory-dim);text-decoration:none;transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{padding:10px 24px;border:1px solid rgba(184,149,42,.3);color:var(--gold);font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.25em;text-transform:uppercase;background:transparent;cursor:none;transition:all .3s;}
+.nav-cta:hover{background:rgba(184,149,42,.08);}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger{display:flex;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1px;background:var(--gold);}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,.98);z-index:900;flex-direction:column;justify-content:center;align-items:center;gap:36px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a,.mobile-menu button{font-family:'Cinzel',serif;font-size:14px;letter-spacing:.3em;color:var(--ivory-dim);text-decoration:none;background:none;border:none;cursor:pointer;transition:color .3s;}
+.mobile-menu a:hover,.mobile-menu button:hover{color:var(--gold);}
+.mobile-close{position:absolute;top:24px;right:28px;background:none;border:none;color:var(--gold-dim);font-size:24px;cursor:pointer;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:140px 40px 100px;position:relative;overflow:hidden;}
+.hero-fog{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(184,149,42,.04) 0%,transparent 70%);animation:fogBreath 8s ease-in-out infinite alternate;}
+@keyframes fogBreath{from{opacity:.6;}to{opacity:1;}}
+.particles{position:absolute;inset:0;overflow:hidden;}
+.particle{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:riseUp linear infinite;}
+@keyframes riseUp{0%{opacity:0;transform:translateY(0) translateX(0);}10%{opacity:.6;}90%{opacity:.1;}100%{opacity:0;transform:translateY(-100vh) translateX(var(--d));}}
+.scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(184,149,42,.1),transparent);animation:scanLine 14s linear infinite;}
+@keyframes scanLine{from{top:100%;}to{top:-5%;}}
+.eyebrow{font-size:9px;font-weight:300;letter-spacing:.55em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:44px;opacity:0;animation:fadeUp 1.2s ease .4s forwards;}
+.eyebrow::before,.eyebrow::after{content:'—';margin:0 14px;opacity:.5;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(50px,8vw,120px);font-weight:300;line-height:.92;letter-spacing:-.02em;color:var(--ivory);opacity:0;animation:fadeUp 1.4s ease .6s forwards;}
+.hero-title .g{color:var(--gold);font-style:italic;display:block;}
+.hero-enter{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.45em;color:var(--gold-dim);margin-top:22px;opacity:0;animation:fadeUp 1s ease .85s forwards;}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2vw,21px);font-weight:300;font-style:italic;color:var(--ivory-dim);max-width:480px;line-height:1.7;margin:20px auto 0;opacity:0;animation:fadeUp 1.2s ease 1s forwards;}
+.hero-line{width:1px;height:68px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:48px auto;opacity:0;animation:fadeUp 1s ease 1.3s forwards;}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 1s ease 1.5s forwards;}
+.hero-stats{display:flex;gap:52px;margin-top:72px;opacity:0;animation:fadeUp 1s ease 1.8s forwards;}
+.h-stat{text-align:center;}
+.h-stat-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--gold);}
+.h-stat-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ivory-dim);margin-top:4px;}
+
+/* BUTTONS */
+.btn-gold{padding:14px 44px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;cursor:none;position:relative;overflow:hidden;transition:color .4s;}
+.btn-gold::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .4s cubic-bezier(.4,0,.2,1);}
+.btn-gold:hover::before{transform:translateY(0);}
+.btn-gold:hover{color:var(--black);}
+.btn-gold span{position:relative;z-index:1;}
+.btn-ghost{padding:14px 44px;background:transparent;border:1px solid rgba(232,224,208,.1);color:var(--ivory-dim);font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;cursor:none;transition:all .4s;}
+.btn-ghost:hover{border-color:rgba(184,149,42,.3);color:var(--ivory);}
+
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeUp 1s ease 2s forwards;}
+.scroll-hint span{font-size:8px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold-dim);}
+.scroll-bar{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:breathe 2.4s ease-in-out infinite;}
+@keyframes breathe{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+/* TICKER */
+.ticker{padding:16px 0;background:var(--black2);border-top:1px solid rgba(184,149,42,.07);border-bottom:1px solid rgba(184,149,42,.07);overflow:hidden;}
+.ticker-track{display:flex;gap:52px;animation:tick 34s linear infinite;white-space:nowrap;}
+.ticker-track span{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;color:rgba(184,149,42,.3);flex-shrink:0;}
+.ticker-track .dot{color:rgba(184,149,42,.5);font-size:6px;}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* SECTIONS */
+.sec{padding:120px 60px;}
+.inner{max-width:1080px;margin:0 auto;}
+.overline{font-size:9px;font-weight:300;letter-spacing:.5em;text-transform:uppercase;color:var(--gold-dim);display:flex;align-items:center;gap:18px;margin-bottom:24px;}
+.overline::before{content:'';display:block;width:30px;height:1px;background:var(--gold-dim);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,52px);font-weight:300;line-height:1.1;color:var(--ivory);margin-bottom:16px;}
+.sec-title em{color:var(--gold);font-style:italic;}
+
+/* OMEN */
+.omen{background:var(--black2);text-align:center;}
+.omen-txt{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.5vw,46px);font-weight:300;line-height:1.5;color:var(--ivory);max-width:800px;margin:0 auto;}
+.omen-txt em{color:var(--gold);font-style:italic;}
+.omen-txt .dim{color:var(--ivory-dim);}
+
+/* PILLARS */
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,149,42,.06);margin-top:64px;}
+.pillar{background:var(--black);padding:52px 34px;position:relative;overflow:hidden;transition:background .5s;}
+.pillar::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .5s;}
+.pillar:hover::after{transform:scaleX(1);}
+.pillar:hover{background:var(--black3);}
+.p-num{font-family:'Cormorant Garamond',serif;font-size:76px;font-weight:300;color:rgba(184,149,42,.05);line-height:1;margin-bottom:18px;transition:color .5s;}
+.pillar:hover .p-num{color:rgba(184,149,42,.1);}
+.p-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;color:var(--gold);margin-bottom:14px;}
+.p-body{font-size:13px;font-weight:300;line-height:1.9;color:var(--ivory-dim);}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(184,149,42,.06);}
+.svc{background:var(--black2);padding:52px 44px;position:relative;overflow:hidden;transition:background .5s;}
+.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);transform:scaleY(0);transition:transform .5s;}
+.svc:hover::before{transform:scaleY(1);}
+.svc:hover{background:var(--black3);}
+.svc-glyph{font-size:20px;color:var(--gold);margin-bottom:28px;display:block;opacity:.65;}
+.svc-name{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.18em;color:var(--ivory);margin-bottom:14px;}
+.svc-desc{font-size:13px;font-weight:300;line-height:1.9;color:var(--ivory-dim);margin-bottom:28px;}
+.svc-link{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;background:none;border:none;cursor:none;}
+.svc-link::after{content:'→';}
+.svc:hover .svc-link{color:var(--gold);gap:16px;}
+.svc-soon{background:var(--black);border:1px dashed rgba(184,149,42,.08);}
+.svc-soon .svc-glyph{opacity:.2;}
+.svc-soon .svc-name{color:var(--ivory-dim);}
+
+/* PROCESS */
+.process-sec{background:var(--black3);}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(184,149,42,.06);margin-top:64px;}
+.step{background:var(--black3);padding:44px 28px;position:relative;overflow:hidden;transition:background .5s;}
+.step:hover{background:var(--black4);}
+.step-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(184,149,42,.2),transparent);}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:rgba(184,149,42,.06);line-height:1;margin-bottom:18px;}
+.step-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;color:var(--gold);margin-bottom:12px;}
+.step-body{font-size:12px;font-weight:300;line-height:1.9;color:var(--ivory-dim);}
+
+/* TESTIMONIALS */
+.testimonials-sec{background:var(--black2);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,149,42,.06);margin-top:64px;}
+.testi{background:var(--black2);padding:44px 34px;position:relative;}
+.testi::before{content:'❝';position:absolute;top:28px;right:28px;font-family:'Cormorant Garamond',serif;font-size:48px;color:rgba(184,149,42,.08);line-height:1;}
+.testi-body{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;font-style:italic;line-height:1.8;color:var(--ivory);margin-bottom:28px;}
+.testi-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;color:var(--gold);margin-bottom:4px;}
+.testi-role{font-size:11px;font-weight:300;color:var(--ivory-dim);}
+.testi-stars{color:var(--gold);font-size:10px;margin-bottom:18px;letter-spacing:3px;}
+
+/* FAQ */
+.faq-sec{background:var(--black);}
+.faq-list{margin-top:60px;max-width:780px;}
+.faq-item{border-bottom:1px solid rgba(184,149,42,.08);}
+.faq-q{width:100%;background:none;border:none;padding:24px 0;display:flex;justify-content:space-between;align-items:center;cursor:none;text-align:left;}
+.faq-q-text{font-family:'Jost',sans-serif;font-size:14px;font-weight:300;color:var(--ivory);letter-spacing:.04em;}
+.faq-icon{color:var(--gold);font-size:18px;transition:transform .3s;flex-shrink:0;margin-left:20px;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-item.open .faq-a{max-height:300px;}
+.faq-a-inner{padding:0 0 24px;font-size:13px;font-weight:300;line-height:1.9;color:var(--ivory-dim);}
+
+/* BLOG PREVIEW */
+.blog-sec{background:var(--black3);}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,149,42,.06);margin-top:64px;}
+.blog-card{background:var(--black3);padding:40px 32px;transition:background .4s;position:relative;overflow:hidden;}
+.blog-card:hover{background:var(--black4);}
+.blog-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.35em;color:var(--gold-dim);margin-bottom:18px;display:block;}
+.blog-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--ivory);line-height:1.35;margin-bottom:14px;}
+.blog-excerpt{font-size:12px;font-weight:300;line-height:1.9;color:var(--ivory-dim);margin-bottom:24px;}
+.blog-read{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s;}
+.blog-read::after{content:'→';}
+.blog-card:hover .blog-read{color:var(--gold);gap:14px;}
+.blog-date{position:absolute;bottom:28px;right:28px;font-size:9px;letter-spacing:.1em;color:rgba(138,127,106,.3);}
+
+/* VEIL */
+.veil{background:var(--black);text-align:center;}
+.veil-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,56px);font-weight:300;color:var(--ivory);line-height:1.1;margin-bottom:18px;}
+.veil-title em{color:var(--gold);font-style:italic;}
+.veil-body{font-size:13px;font-weight:300;line-height:1.9;color:var(--ivory-dim);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;}
+.gold-rule{width:48px;height:1px;background:var(--gold);margin:0 auto;}
+
+/* MANIFESTO */
+.manifesto{background:var(--black3);text-align:center;position:relative;overflow:hidden;}
+.manifesto::before{content:'"';position:absolute;top:-80px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:300px;line-height:1;color:rgba(184,149,42,.025);pointer-events:none;}
+.man-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,50px);font-weight:300;font-style:italic;line-height:1.35;color:var(--ivory);max-width:840px;margin:0 auto;position:relative;}
+.man-quote em{color:var(--gold);}
+.man-src{margin-top:32px;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);}
+
+/* LIVE CHAT BADGE (Tidio placeholder) */
+.chat-badge{position:fixed;bottom:32px;right:32px;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.chat-bubble{background:var(--black2);border:1px solid rgba(184,149,42,.2);padding:10px 18px;font-size:11px;font-weight:300;color:var(--ivory-dim);box-shadow:0 8px 32px rgba(0,0,0,.4);animation:fadeUp .5s ease forwards;display:none;}
+.chat-btn{width:52px;height:52px;background:var(--black2);border:1px solid rgba(184,149,42,.3);color:var(--gold);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:none;transition:all .3s;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+.chat-btn:hover{background:rgba(184,149,42,.08);border-color:var(--gold);}
+
+/* WAITLIST */
+.waitlist{background:var(--black);text-align:center;}
+.wl-inner{max-width:580px;margin:0 auto;}
+.wl-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.5vw,64px);font-weight:300;color:var(--ivory);line-height:1.05;margin-bottom:14px;}
+.wl-title em{color:var(--gold);font-style:italic;}
+.wl-sub{font-size:13px;font-weight:300;line-height:1.9;color:var(--ivory-dim);margin-bottom:44px;}
+.wl-row{display:flex;max-width:460px;margin:0 auto 10px;}
+.wl-input{flex:1;padding:14px 18px;background:rgba(255,255,255,.02);border:1px solid rgba(184,149,42,.15);border-right:none;color:var(--ivory);font-family:'Jost',sans-serif;font-size:12px;font-weight:300;outline:none;transition:border-color .3s;}
+.wl-input::placeholder{color:rgba(138,127,106,.4);}
+.wl-input:focus{border-color:rgba(184,149,42,.4);}
+.wl-btn{padding:14px 22px;background:var(--gold);border:1px solid var(--gold);color:var(--black);font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;cursor:none;transition:background .3s;white-space:nowrap;}
+.wl-btn:hover{background:var(--gold-light);}
+.wl-note{font-size:10px;font-weight:300;letter-spacing:.06em;color:rgba(138,127,106,.35);}
+.wl-success{display:none;font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--gold);margin-top:10px;}
+
+/* CALL */
+.call-sec{background:var(--black2);border-top:1px solid rgba(184,149,42,.06);text-align:center;}
+.call-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,50px);font-weight:300;color:var(--ivory);margin-bottom:14px;}
+.call-title em{color:var(--gold);font-style:italic;}
+.call-sub{font-size:13px;font-weight:300;line-height:1.9;color:var(--ivory-dim);max-width:420px;margin:0 auto 40px;}
+
+/* NEWSLETTER */
+.newsletter-bar{background:var(--black4);border-top:1px solid rgba(184,149,42,.08);border-bottom:1px solid rgba(184,149,42,.08);padding:32px 60px;}
+.nl-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.nl-text h4{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.2em;color:var(--gold);margin-bottom:6px;}
+.nl-text p{font-size:12px;font-weight:300;color:var(--ivory-dim);}
+.nl-form{display:flex;gap:0;}
+.nl-input{padding:12px 18px;background:rgba(255,255,255,.02);border:1px solid rgba(184,149,42,.15);border-right:none;color:var(--ivory);font-family:'Jost',sans-serif;font-size:12px;font-weight:300;outline:none;width:260px;transition:border-color .3s;}
+.nl-input::placeholder{color:rgba(138,127,106,.4);}
+.nl-input:focus{border-color:rgba(184,149,42,.4);}
+.nl-btn{padding:12px 22px;background:transparent;border:1px solid rgba(184,149,42,.3);color:var(--gold);font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;cursor:none;transition:all .3s;white-space:nowrap;}
+.nl-btn:hover{background:rgba(184,149,42,.08);}
+
+/* FOOTER */
+footer{padding:64px 60px 36px;border-top:1px solid rgba(184,149,42,.06);}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:52px;}
+.footer-brand .f-logo{font-family:'Cinzel',serif;font-size:14px;letter-spacing:.4em;color:var(--gold);margin-bottom:18px;display:block;}
+.footer-brand p{font-size:12px;font-weight:300;line-height:1.9;color:var(--ivory-dim);max-width:260px;}
+.footer-col h5{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;color:var(--gold-dim);margin-bottom:20px;}
+.footer-col a{display:block;font-size:12px;font-weight:300;color:var(--ivory-dim);text-decoration:none;margin-bottom:10px;transition:color .3s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-social{display:flex;gap:14px;margin-top:20px;}
+.social-btn{width:36px;height:36px;border:1px solid rgba(184,149,42,.15);display:flex;align-items:center;justify-content:center;color:var(--ivory-dim);font-size:12px;text-decoration:none;transition:all .3s;}
+.social-btn:hover{border-color:rgba(184,149,42,.4);color:var(--gold);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid rgba(184,149,42,.05);flex-wrap:wrap;gap:12px;}
+.f-mid{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ivory-dim);}
+.f-copy{font-size:9px;letter-spacing:.12em;color:rgba(138,127,106,.3);}
+.footer-legal{display:flex;gap:24px;}
+.footer-legal a{font-size:9px;letter-spacing:.1em;color:rgba(138,127,106,.3);text-decoration:none;transition:color .3s;}
+.footer-legal a:hover{color:var(--gold-dim);}
+
+/* BACK TO TOP */
+#backTop{position:fixed;bottom:96px;right:32px;width:40px;height:40px;background:var(--black2);border:1px solid rgba(184,149,42,.2);color:var(--gold);font-size:16px;display:none;align-items:center;justify-content:center;cursor:none;z-index:7000;transition:all .3s;}
+#backTop:hover{background:rgba(184,149,42,.08);border-color:rgba(184,149,42,.4);}
+#backTop.visible{display:flex;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.12s;}.d2{transition-delay:.24s;}.d3{transition-delay:.36s;}.d4{transition-delay:.48s;}
+
+/* POPUP */
+.popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:8000;justify-content:center;align-items:center;padding:20px;}
+.popup-box{position:relative;width:100%;max-width:500px;background:#0e0e0e;border:1px solid rgba(184,149,42,.3);box-shadow:0 0 80px rgba(184,149,42,.06);}
+.popup-close{position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(184,149,42,.5);font-size:20px;cursor:pointer;line-height:1;padding:4px 8px;z-index:1;}
+.popup-close:hover{color:var(--gold);}
+.popup-header{padding:32px 36px 22px;text-align:center;border-bottom:1px solid rgba(184,149,42,.08);}
+.popup-eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.45em;color:var(--gold);margin-bottom:10px;}
+.popup-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ivory);line-height:1.2;margin-bottom:6px;}
+.popup-title em{color:var(--gold);font-style:italic;}
+.popup-sub{font-family:'Jost',sans-serif;font-size:12px;font-weight:300;color:var(--ivory-dim);}
+.popup-body{padding:28px 36px 32px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:7px;}
+.field input,.field select{width:100%;padding:12px 15px;background:rgba(255,255,255,.02);border:1px solid rgba(184,149,42,.15);color:var(--ivory);font-family:'Jost',sans-serif;font-size:13px;font-weight:300;outline:none;transition:border-color .3s;box-sizing:border-box;}
+.field select{background:#0e0e0e;cursor:pointer;appearance:none;}
+.field input:focus,.field select:focus{border-color:rgba(184,149,42,.45);}
+.field input::placeholder{color:rgba(138,127,106,.4);}
+.popup-error{display:none;color:rgba(210,80,80,.85);font-family:'Jost',sans-serif;font-size:11px;text-align:center;margin-bottom:12px;}
+.popup-submit{width:100%;padding:14px;background:var(--gold);border:none;color:var(--black);font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:background .3s;margin-bottom:12px;}
+.popup-submit:hover{background:var(--gold-light);}
+.popup-disclaimer{text-align:center;font-family:'Jost',sans-serif;font-size:10px;font-weight:300;color:rgba(138,127,106,.35);letter-spacing:.04em;}
+.popup-success{display:none;padding:40px 36px;text-align:center;}
+.popup-success .s-glyph{font-size:40px;color:var(--gold);margin-bottom:14px;}
+.popup-success h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--ivory);margin-bottom:10px;}
+.popup-success h3 em{color:var(--gold);font-style:italic;}
+.popup-success p{font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:var(--ivory-dim);line-height:1.8;margin-bottom:24px;}
+.popup-done{padding:12px 36px;background:transparent;border:1px solid rgba(184,149,42,.3);color:var(--gold);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.popup-done:hover{border-color:var(--gold);background:rgba(184,149,42,.05);}
+
+/* COOKIE BANNER */
+.cookie-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(14,14,14,.97);border-top:1px solid rgba(184,149,42,.1);padding:18px 60px;display:flex;align-items:center;justify-content:space-between;gap:24px;z-index:8500;flex-wrap:wrap;transform:translateY(100%);transition:transform .5s ease;}
+.cookie-bar.show{transform:translateY(0);}
+.cookie-bar p{font-size:12px;font-weight:300;color:var(--ivory-dim);max-width:600px;line-height:1.6;}
+.cookie-bar p a{color:var(--gold-dim);text-decoration:underline;}
+.cookie-btns{display:flex;gap:10px;flex-shrink:0;}
+.cookie-accept{padding:10px 24px;background:var(--gold);border:none;color:var(--black);font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .3s;}
+.cookie-accept:hover{background:var(--gold-light);}
+.cookie-decline{padding:10px 24px;background:transparent;border:1px solid rgba(184,149,42,.2);color:var(--ivory-dim);font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.cookie-decline:hover{border-color:rgba(184,149,42,.4);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .blog-grid{grid-template-columns:1fr 1fr;}
+  .process-steps{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav{padding:18px 22px;}
+  .nav-links{display:none;}
+  .nav-mobile-btn{display:block;}
+  .sec{padding:72px 22px;}
+  .pillars-grid,.services-grid,.blog-grid,.process-steps{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  footer{padding:52px 22px 28px;}
+  .wl-row{flex-direction:column;}
+  .wl-input{border-right:1px solid rgba(184,149,42,.15);border-bottom:none;}
+  .popup-body{padding:22px 24px 26px;}
+  .popup-header{padding:26px 24px 18px;}
+  .hero-stats{flex-direction:column;gap:28px;align-items:center;}
+  .nl-inner{flex-direction:column;align-items:flex-start;}
+  .nl-input{width:100%;}
+  .newsletter-bar{padding:28px 22px;}
+  .cookie-bar{padding:16px 22px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="curR"></div>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">AURUM COLLECTIVE</a>
+  <div class="nav-links">
+    <a href="#services">The Collective</a>
+    <a href="#process">Our Process</a>
+    <a href="#testimonials">Results</a>
+    <a href="#faq">FAQ</a>
+    <a href="#waitlist">Request Access</a>
+    <button class="nav-cta" id="navCallBtn">Speak With Us</button>
+  </div>
+  <button class="nav-mobile-btn" id="mobileMenuBtn" aria-label="Menu">
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#services" class="mobile-link">The Collective</a>
+  <a href="#process" class="mobile-link">Our Process</a>
+  <a href="#testimonials" class="mobile-link">Results</a>
+  <a href="#faq" class="mobile-link">FAQ</a>
+  <a href="#waitlist" class="mobile-link">Request Access</a>
+  <button class="mobile-link" id="mobileCallBtn">Speak With Us</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-fog"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scan"></div>
+  <p class="eyebrow">Where Purpose Becomes Prosperity</p>
+  <h1 class="hero-title">Enter your<br><span class="g">golden era.</span></h1>
+  <p class="hero-enter">ENTER THE COLLECTIVE</p>
+  <p class="hero-sub">A members-only ecosystem where freedom stops being the dream — and becomes the beginning.</p>
+  <div class="hero-line"></div>
+  <div class="hero-ctas">
+    <button class="btn-gold" id="heroWaitlistBtn"><span>Request Access</span></button>
+    <button class="btn-ghost" id="heroCallBtn">Speak With Us</button>
+  </div>
+  <div class="hero-stats reveal">
+    <div class="h-stat"><div class="h-stat-num">200+</div><div class="h-stat-label">Members</div></div>
+    <div class="h-stat"><div class="h-stat-num">3</div><div class="h-stat-label">Founding Spots Left</div></div>
+    <div class="h-stat"><div class="h-stat-num">100%</div><div class="h-stat-label">Digital Freedom</div></div>
+  </div>
+  <div class="scroll-hint">
+    <span>Descend</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>AURUM COLLECTIVE</span><span class="dot">◆</span><span>FINANCIAL FREEDOM</span><span class="dot">◆</span><span>MEMBERS ONLY</span><span class="dot">◆</span><span>WEB DESIGN</span><span class="dot">◆</span><span>PAYMENT PROCESSING</span><span class="dot">◆</span><span>ENTER IF YOU DARE</span><span class="dot">◆</span><span>DIGITAL FREEDOM</span><span class="dot">◆</span><span>THE COLLECTIVE</span><span class="dot">◆</span><span>WHERE THE FEW FIND FREEDOM</span><span class="dot">◆</span>
+    <span>AURUM COLLECTIVE</span><span class="dot">◆</span><span>FINANCIAL FREEDOM</span><span class="dot">◆</span><span>MEMBERS ONLY</span><span class="dot">◆</span><span>WEB DESIGN</span><span class="dot">◆</span><span>PAYMENT PROCESSING</span><span class="dot">◆</span><span>ENTER IF YOU DARE</span><span class="dot">◆</span><span>DIGITAL FREEDOM</span><span class="dot">◆</span><span>THE COLLECTIVE</span><span class="dot">◆</span><span>WHERE THE FEW FIND FREEDOM</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- OMEN -->
+<section class="sec omen" id="omenSection">
+  <div class="inner">
+    <p class="omen-txt reveal">Most people spend their entire lives<br><span class="dim">working for a system</span><br>that was never designed<br>to set them <em>free.</em></p>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="sec" style="background:var(--black);">
+  <div class="inner">
+    <p class="overline reveal">The Three Laws</p>
+    <div class="pillars-grid">
+      <div class="pillar reveal"><div class="p-num">01</div><div class="p-name">Discovery</div><div class="p-body">Most people never find the right path — not because it does not exist, but because no one showed them where to look. The Collective changes that. We illuminate the road.</div></div>
+      <div class="pillar reveal d1"><div class="p-num">02</div><div class="p-name">Infrastructure</div><div class="p-body">Freedom is not built on inspiration. It is built on systems. We give members the digital infrastructure — the tools, the knowledge, the community — to build income that does not stop when they do.</div></div>
+      <div class="pillar reveal d2"><div class="p-num">03</div><div class="p-name">Ascension</div><div class="p-body">Once the foundation is laid and the path is clear — growth becomes inevitable. Ascension is not a destination. It is the natural result of the right environment and the right people around you.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" style="background:var(--black2);" id="services">
+  <div class="inner">
+    <p class="overline reveal">What We Offer</p>
+    <h2 class="sec-title reveal d1">Built for those<br>who are <em>done waiting.</em></h2>
+    <div class="services-grid">
+      <div class="svc reveal"><span class="svc-glyph">◈</span><h3 class="svc-name">The Collective Membership</h3><p class="svc-desc">This is not a subscription. It is an initiation. Members receive access to an exclusive ecosystem of tools, knowledge, community, and strategy — everything required to build real financial freedom from the ground up.</p><button class="svc-link" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Request membership access</button></div>
+      <div class="svc reveal d1"><span class="svc-glyph">◇</span><h3 class="svc-name">Community & Collective</h3><p class="svc-desc">The most valuable thing inside Aurum is not a tool or a course. It is the people. A curated community of entrepreneurs, builders, and visionaries who share one common language — freedom. Access is earned, not purchased.</p><button class="svc-link" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Secure your place</button></div>
+      <div class="svc reveal d2"><span class="svc-glyph">✦</span><h3 class="svc-name">Web Design & Digital Presence</h3><p class="svc-desc">Your digital presence is your first word to the world. We build websites that do not just exist — they command, convert, and close. Premium infrastructure for businesses that refuse to look ordinary.</p><button class="svc-link" id="svcCallBtn">Begin the conversation</button></div>
+      <div class="svc svc-soon reveal d3"><span class="svc-glyph">◎</span><h3 class="svc-name">Something Is Coming</h3><p class="svc-desc">The Collective is growing. What arrives next will change how members generate, manage, and multiply their wealth. We are not ready to speak about it yet. Those on the waitlist will be the first to know.</p><button class="svc-link" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get first access</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec process-sec" id="process">
+  <div class="inner">
+    <p class="overline reveal">How It Works</p>
+    <h2 class="sec-title reveal d1">From conversation<br>to <em>live in days.</em></h2>
+    <div class="process-steps">
+      <div class="step reveal"><div class="step-line"></div><div class="step-num">01</div><div class="step-name">The Conversation</div><div class="step-body">We begin with a private strategy session. No templates. No pressure. We listen to your vision, your business, and what you actually need — then we design the solution around that.</div></div>
+      <div class="step reveal d1"><div class="step-line"></div><div class="step-num">02</div><div class="step-name">The Blueprint</div><div class="step-body">Within 24 hours we deliver a complete site architecture — every page, every tool, every integration mapped before a single line is written. You approve it. We build it.</div></div>
+      <div class="step reveal d2"><div class="step-line"></div><div class="step-num">03</div><div class="step-name">The Build</div><div class="step-body">Premium design. Lightning performance. Every tool integrated and tested. Booking systems, live chat, payments, analytics — all running before you see the preview link.</div></div>
+      <div class="step reveal d3"><div class="step-line"></div><div class="step-num">04</div><div class="step-name">The Launch</div><div class="step-body">You approve. We deploy. Your domain goes live. You get full access to your Vercel dashboard — your site, your data, your analytics. We handle everything else, forever.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec testimonials-sec" id="testimonials">
+  <div class="inner">
+    <p class="overline reveal">What Members Say</p>
+    <h2 class="sec-title reveal d1">Results speak<br>louder than <em>promises.</em></h2>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-body">"Before the Collective I had no digital presence, no systems, and no clear path. Within 90 days I had a website that converts, a booking system running automatically, and my first three clients through the door."</p>
+        <div class="testi-name">Marcus T.</div>
+        <div class="testi-role">Barber Shop Owner, Dallas TX</div>
+      </div>
+      <div class="testi reveal d1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-body">"I had been told by two other agencies that what I wanted was impossible in my budget. Aurum built it in less than a week and it looks better than anything I could have imagined. My clients comment on it constantly."</p>
+        <div class="testi-name">Tia M.</div>
+        <div class="testi-role">Beauty Bar Founder, Arlington TX</div>
+      </div>
+      <div class="testi reveal d2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-body">"The retainer model is the smartest thing I have ever done for my business. One monthly fee and I never think about my website again. It just works. Updates happen. New clients find me. That is freedom."</p>
+        <div class="testi-name">Derek S.</div>
+        <div class="testi-role">Fitness Studio Owner, Fort Worth TX</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEIL -->
+<section class="sec veil">
+  <div class="inner">
+    <div style="max-width:640px;margin:0 auto;text-align:center;">
+      <div class="gold-rule reveal" style="margin-bottom:44px;"></div>
+      <p class="overline reveal" style="justify-content:center;">Investment</p>
+      <h2 class="veil-title reveal d1">Some things are not<br>meant to have a <em>price tag.</em></h2>
+      <p class="veil-body reveal d2">Pricing is not hidden because we are evasive.<br>It is hidden because what we offer is not one-size-fits-all.<br>Every conversation is different. Every path is personal.<br>Book a call. We will find what is right for you.</p>
+      <div class="reveal d3"><button class="btn-gold" id="veilCallBtn"><span>Begin the Conversation</span></button></div>
+      <div class="gold-rule reveal" style="margin-top:44px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq-sec" id="faq">
+  <div class="inner">
+    <p class="overline reveal">Questions</p>
+    <h2 class="sec-title reveal d1">Everything you need<br>to <em>know before you ask.</em></h2>
+    <div class="faq-list reveal d2">
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What exactly is Aurum Collective?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Aurum Collective is a members-only ecosystem built around one idea — financial freedom through digital income. We combine premium web design, payment infrastructure, and a private community of builders and entrepreneurs. This is not a course. It is not a coaching program. It is a complete environment designed to take you from where you are to where you want to be.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How much does a website cost?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We do not publish prices because every project is different. What we can tell you is that we have built for businesses at every stage — from first-time entrepreneurs to established operators. Book a private call and we will design a solution around your actual budget and needs. No pressure. No pitch. Just a conversation.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Do I own my website once it is built?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Completely and entirely. Your website is yours from day one. You have full access to your hosting dashboard, your analytics, your domain, and your code. Unlike most agencies we do not use proprietary builders that lock you in. Your site belongs to your business — not to us. If you ever choose to leave, you take everything with you.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How long does it take to go live?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most sites go live within 3 to 7 days from the initial conversation. Complex Elite tier builds with full integrations may take up to 14 days. We do not rush quality — but we do not waste your time either. You will have a preview link to review before anything goes live.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What is included in the monthly retainer?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Your retainer covers hosting, all tool subscriptions, unlimited small updates, performance monitoring, security, and priority support. You pay one number on the first of every month and your entire digital presence is handled. You focus on running your business. We handle everything else.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How do I join the Collective membership?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Membership is by application only. We are currently selecting founding members with intention — not volume. Leave your information on the waitlist below. If you are meant to be here, you will know. Founding members receive access at a rate that will never be offered again once doors officially open.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="sec blog-sec" id="insights">
+  <div class="inner">
+    <p class="overline reveal">From The Collective</p>
+    <h2 class="sec-title reveal d1">Insights for those<br>building something <em>real.</em></h2>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <span class="blog-tag">Web Design</span>
+        <h3 class="blog-title">Why Your Website Is Losing You Clients Before They Even Call</h3>
+        <p class="blog-excerpt">Most small business websites answer one question — do you exist? Elite websites answer a different question — are you the only logical choice? Here is the difference.</p>
+        <a href="#" class="blog-read">Read the insight</a>
+        <span class="blog-date">March 2026</span>
+      </div>
+      <div class="blog-card reveal d1">
+        <span class="blog-tag">Financial Freedom</span>
+        <h3 class="blog-title">The Three Digital Income Streams Every Business Owner Should Have Running</h3>
+        <p class="blog-excerpt">You already have a business. The question is whether that business is working for you while you sleep. Three systems every operator should have in place right now.</p>
+        <a href="#" class="blog-read">Read the insight</a>
+        <span class="blog-date">February 2026</span>
+      </div>
+      <div class="blog-card reveal d2">
+        <span class="blog-tag">The Collective</span>
+        <h3 class="blog-title">What Founding Membership Actually Means — And Why It Will Not Be Offered Again</h3>
+        <p class="blog-excerpt">When an institution opens its doors for the first time, the people who enter first are not just members. They are part of the foundation. Here is what that means for you.</p>
+        <a href="#" class="blog-read">Read the insight</a>
+        <span class="blog-date">January 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="sec manifesto">
+  <div class="inner">
+    <p class="man-quote reveal">You have spent long enough<br>feeling <em>lost.</em><br>What you needed was never luck —<br>it was the right <em>door.</em></p>
+    <p class="man-src reveal d1">— The Aurum Manifesto</p>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="sec waitlist" id="waitlist">
+  <div class="inner">
+    <div class="wl-inner">
+      <p class="overline reveal" style="justify-content:center;">Membership</p>
+      <h2 class="wl-title reveal d1">The doors are<br><em>not open yet.</em></h2>
+      <p class="wl-sub reveal d2">We are selecting the founding members of Aurum Collective with intention. Leave your name on the list. If you are meant to be here — you will know.</p>
+      <form name="waitlist" method="POST" data-netlify="true" id="wlForm" class="reveal d3">
+        <input type="hidden" name="form-name" value="waitlist"/>
+        <div class="wl-row">
+          <input type="email" name="email" class="wl-input" id="wlEmail" placeholder="Your email address" required/>
+          <button type="submit" class="wl-btn">Request Access</button>
+        </div>
+      </form>
+      <p class="wl-note reveal d4">Your information remains within the Collective. Always.</p>
+      <p class="wl-success" id="wlSuccess">◆ &nbsp; You have been received. We will find you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALL -->
+<section class="sec call-sec" id="call">
+  <div class="inner" style="text-align:center;">
+    <p class="overline reveal" style="justify-content:center;">For Business Owners</p>
+    <h2 class="call-title reveal d1">Ready to build<br>something <em>permanent?</em></h2>
+    <p class="call-sub reveal d2">No pitch. No pressure. No performance. A private conversation about where you are, where you are going, and how the Collective gets you there.</p>
+    <div class="reveal d3"><button class="btn-gold" id="callPopupBtn"><span>Book a Private Call</span></button></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER BAR -->
+<div class="newsletter-bar">
+  <div class="nl-inner">
+    <div class="nl-text">
+      <h4>The Aurum Letter</h4>
+      <p>Weekly insights on freedom, wealth, and digital infrastructure. For members and those becoming one.</p>
+    </div>
+    <div class="nl-form">
+      <input type="email" class="nl-input" id="nlEmail" placeholder="Your email address"/>
+      <button class="nl-btn" id="nlBtn">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="f-logo">AURUM COLLECTIVE</span>
+      <p>A members-only ecosystem where financial freedom stops being the dream and becomes the beginning. Built for the few who are ready.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/_AurumCollective" class="social-btn" target="_blank" rel="noopener">IG</a>
+        <a href="#" class="social-btn">TK</a>
+        <a href="#" class="social-btn">LI</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>The Collective</h5>
+      <a href="#services">Membership</a>
+      <a href="#services">Community</a>
+      <a href="#services">Web Design</a>
+      <a href="#insights">Insights</a>
+    </div>
+    <div class="footer-col">
+      <h5>Navigate</h5>
+      <a href="#process">Our Process</a>
+      <a href="#testimonials">Results</a>
+      <a href="#faq">FAQ</a>
+      <a href="#waitlist">Request Access</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <a href="mailto:AurumCollective.Web@gmail.com">AurumCollective.Web<br>@gmail.com</a>
+      <a href="#call" style="margin-top:8px;display:block;">Book a Private Call</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="f-mid">Where the Few Find Freedom.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+    <div class="f-copy">© 2026 Aurum Collective. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="backTop" aria-label="Back to top">↑</button>
+
+<!-- LIVE CHAT BADGE (placeholder — replace script tag with Tidio embed) -->
+<div class="chat-badge">
+  <div class="chat-bubble" id="chatBubble">Welcome to Aurum. How can we help?</div>
+  <button class="chat-btn" id="chatBtn" aria-label="Open chat">💬</button>
+</div>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-bar" id="cookieBar">
+  <p>The Collective uses cookies to ensure you receive the experience you deserve. By continuing you agree to our <a href="#">Cookie Policy</a>.</p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" id="cookieAccept">Accept</button>
+    <button class="cookie-decline" id="cookieDecline">Decline</button>
+  </div>
+</div>
+
+<!-- HIDDEN NETLIFY FORMS -->
+<form name="waitlist" data-netlify="true" style="display:none;">
+  <input type="hidden" name="form-name" value="waitlist"/><input type="email" name="email"/>
+</form>
+<form name="lead-capture" data-netlify="true" style="display:none;">
+  <input type="hidden" name="form-name" value="lead-capture"/>
+  <input type="text" name="name"/><input type="email" name="email"/>
+  <input type="tel" name="phone"/><select name="type"><option>Business Owner</option></select>
+</form>
+<form name="newsletter" data-netlify="true" style="display:none;">
+  <input type="hidden" name="form-name" value="newsletter"/><input type="email" name="email"/>
+</form>
+
+<!-- LEAD CAPTURE POPUP -->
+<div class="popup-overlay" id="leadPopup">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">✕</button>
+    <div class="popup-header">
+      <p class="popup-eyebrow">AURUM COLLECTIVE</p>
+      <h3 class="popup-title">Begin Your <em>Ascension</em></h3>
+      <p class="popup-sub">Your private strategy session starts here.</p>
+    </div>
+    <div class="popup-body" id="popupForm">
+      <div class="field"><label>Full Name</label><input type="text" id="pName" placeholder="Your full name"/></div>
+      <div class="field"><label>Email Address</label><input type="email" id="pEmail" placeholder="Your email address"/></div>
+      <div class="field"><label>Phone Number</label><input type="tel" id="pPhone" placeholder="Your phone number"/></div>
+      <div class="field">
+        <label>What Describes You Best?</label>
+        <select id="pType">
+          <option value="">Select your path</option>
+          <option>Business Owner / CEO</option>
+          <option>Entrepreneur</option>
+          <option>Seeking Financial Freedom</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <p class="popup-error" id="popupError">Please fill in all fields to continue.</p>
+      <button class="popup-submit" id="popupSubmit">Request Your Strategy Session →</button>
+      <p class="popup-disclaimer">Your information remains within the Collective. Always.</p>
+    </div>
+    <div class="popup-success" id="popupSuccess">
+      <div class="s-glyph">◆</div>
+      <h3>You Have Been <em>Received.</em></h3>
+      <p>A member of the Collective will be in touch shortly.<br>Welcome to the beginning.</p>
+      <button class="popup-done" id="popupDone">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+// CURSOR
+var cur  = document.getElementById('cur');
+var curR = document.getElementById('curR');
+document.addEventListener('mousemove',function(e){
+  cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px';
+  setTimeout(function(){curR.style.left=e.clientX+'px';curR.style.top=e.clientY+'px';},60);
+});
+document.querySelectorAll('a,button,input,select').forEach(function(el){
+  el.addEventListener('mouseenter',function(){curR.style.transform='translate(-50%,-50%) scale(1.7)';curR.style.borderColor='rgba(184,149,42,.8)';});
+  el.addEventListener('mouseleave',function(){curR.style.transform='translate(-50%,-50%) scale(1)';curR.style.borderColor='rgba(184,149,42,.4)';});
+});
+
+// PROGRESS BAR + NAV SCROLL
+var prog = document.getElementById('progress');
+var nav  = document.getElementById('mainNav');
+var backTop = document.getElementById('backTop');
+window.addEventListener('scroll',function(){
+  var st = window.scrollY;
+  var dh = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (dh > 0 ? (st/dh)*100 : 0)+'%';
+  nav.classList.toggle('scrolled', st > 60);
+  backTop.classList.toggle('visible', st > 400);
+});
+
+// BACK TO TOP
+backTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+// PARTICLES
+var pc = document.getElementById('particles');
+for(var i=0;i<48;i++){
+  var p=document.createElement('div'); p.className='particle';
+  var sz=Math.random()*2+.5;
+  p.style.cssText='left:'+Math.random()*100+'%;bottom:'+Math.random()*15+'%;width:'+sz+'px;height:'+sz+'px;--d:'+((Math.random()-.5)*70)+'px;animation-duration:'+(Math.random()*13+9)+'s;animation-delay:'+(Math.random()*11)+'s;';
+  pc.appendChild(p);
+}
+
+// SCROLL REVEAL
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('on');});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(r){obs.observe(r);});
+
+// SCROLL POPUP — fires on omen section
+var popupFired=false;
+var omenObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting&&!popupFired){
+      popupFired=true;
+      setTimeout(openPopup,800);
+      omenObs.disconnect();
+    }
+  });
+},{threshold:.4});
+var omenSection=document.getElementById('omenSection');
+if(omenSection) omenObs.observe(omenSection);
+
+// MOBILE MENU
+var mobileMenu=document.getElementById('mobileMenu');
+document.getElementById('mobileMenuBtn').addEventListener('click',function(){mobileMenu.classList.add('open');});
+document.getElementById('mobileClose').addEventListener('click',function(){mobileMenu.classList.remove('open');});
+document.querySelectorAll('.mobile-link').forEach(function(l){
+  l.addEventListener('click',function(){mobileMenu.classList.remove('open');});
+});
+document.getElementById('mobileCallBtn').addEventListener('click',function(){mobileMenu.classList.remove('open');openPopup();});
+
+// FAQ ACCORDION
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=this.closest('.faq-item');
+    var wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+
+// CHAT BADGE
+var chatBubble=document.getElementById('chatBubble');
+var chatShown=false;
+document.getElementById('chatBtn').addEventListener('click',function(){
+  chatBubble.style.display=chatBubble.style.display==='block'?'none':'block';
+});
+setTimeout(function(){
+  if(!chatShown){chatShown=true;chatBubble.style.display='block';setTimeout(function(){chatBubble.style.display='none';},5000);}
+},8000);
+
+// NEWSLETTER
+document.getElementById('nlBtn').addEventListener('click',function(){
+  var email=document.getElementById('nlEmail').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('nlEmail').style.borderColor='rgba(210,80,80,.5)';return;}
+  document.getElementById('nlEmail').style.borderColor='rgba(184,149,42,.4)';
+  var data=new URLSearchParams();
+  data.append('form-name','newsletter');data.append('email',email);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()}).finally(function(){
+    document.getElementById('nlEmail').value='';
+    document.getElementById('nlBtn').textContent='Received ◆';
+    document.getElementById('nlBtn').style.color='var(--gold)';
+  });
+});
+
+// WAITLIST FORM
+var wlForm=document.getElementById('wlForm');
+if(wlForm){
+  wlForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=document.getElementById('wlEmail').value.trim();
+    if(!email||!email.includes('@')) return;
+    var data=new URLSearchParams();
+    data.append('form-name','waitlist');data.append('email',email);
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()}).finally(function(){
+      wlForm.style.display='none';
+      document.getElementById('wlSuccess').style.display='block';
+    });
+  });
+}
+
+// COOKIE BANNER
+var cookieBar=document.getElementById('cookieBar');
+if(!localStorage.getItem('aurum_cookie')){
+  setTimeout(function(){cookieBar.classList.add('show');},3000);
+}
+document.getElementById('cookieAccept').addEventListener('click',function(){
+  localStorage.setItem('aurum_cookie','accepted');cookieBar.classList.remove('show');
+});
+document.getElementById('cookieDecline').addEventListener('click',function(){
+  localStorage.setItem('aurum_cookie','declined');cookieBar.classList.remove('show');
+});
+
+// POPUP
+var popup=document.getElementById('leadPopup');
+var pForm=document.getElementById('popupForm');
+var pSuccess=document.getElementById('popupSuccess');
+var pError=document.getElementById('popupError');
+
+function openPopup(){popup.style.display='flex';document.body.style.overflow='hidden';}
+function closePopup(){
+  popup.style.display='none';document.body.style.overflow='';
+  pForm.style.display='block';pSuccess.style.display='none';pError.style.display='none';
+  document.getElementById('pName').value='';document.getElementById('pEmail').value='';
+  document.getElementById('pPhone').value='';document.getElementById('pType').value='';
+}
+
+['navCallBtn','heroCallBtn','veilCallBtn','callPopupBtn','svcCallBtn'].forEach(function(id){
+  var el=document.getElementById(id); if(el) el.addEventListener('click',openPopup);
+});
+var hwBtn=document.getElementById('heroWaitlistBtn');
+if(hwBtn) hwBtn.addEventListener('click',function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});});
+document.getElementById('popupClose').addEventListener('click',closePopup);
+document.getElementById('popupDone').addEventListener('click',closePopup);
+popup.addEventListener('click',function(e){if(e.target===popup)closePopup();});
+
+document.getElementById('popupSubmit').addEventListener('click',function(){
+  var name=document.getElementById('pName').value.trim();
+  var email=document.getElementById('pEmail').value.trim();
+  var phone=document.getElementById('pPhone').value.trim();
+  var type=document.getElementById('pType').value;
+  if(!name||!email||!phone||!type){pError.style.display='block';return;}
+  pError.style.display='none';
+  var data=new URLSearchParams();
+  data.append('form-name','lead-capture');data.append('name',name);
+  data.append('email',email);data.append('phone',phone);data.append('type',type);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()}).finally(function(){
+    pForm.style.display='none';pSuccess.style.display='block';
+  });
+});
+
+})();
+</script>
+</body>
+</html>
